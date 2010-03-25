@@ -9,16 +9,20 @@ namespace XatClient
 	{
 		public static void Main(string[] args)
 		{
-			Client client = new Client("192.168.130.42", 9898);
-			
+			Client client = new Client("192.168.130.58", 9898);
+
 			if (client.ConnectToServer())
 			{
-				while (true)
-				{
-                    string cadena = "";
+                string cadena = "";
+                do
+                {
                     cadena = Console.ReadLine();
-					client.WriteLine(cadena);
-				}
+                    if (cadena != "disconnect")
+                    {
+                        client.WriteLine(cadena);
+                    }
+                }
+                while (cadena != "disconnect");
 			}
 		}
 	}
@@ -30,6 +34,7 @@ namespace XatClient
 		private StreamWriter writerStream;
 		private IPEndPoint server_endpoint;
 		private TcpClient tcpClient;
+        string nombre = "Isengar";
 		
 		public Client(string ip, int port)
 		{
@@ -44,6 +49,7 @@ namespace XatClient
 		
 		public void WriteLine(string str)
 		{
+            writerStream.WriteLine(nombre);
 			writerStream.WriteLine(str);
 			writerStream.Flush();
 		}
@@ -53,7 +59,7 @@ namespace XatClient
 			try
 			{
 				// tcpClient = new TcpClient(server_endpoint);
-				tcpClient = new TcpClient("192.168.130.42", 9898);
+				tcpClient = new TcpClient("192.168.130.58", 9898);
 				
 				netStream = tcpClient.GetStream();
 				readerStream = new StreamReader(netStream);

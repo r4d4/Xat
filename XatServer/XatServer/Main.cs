@@ -11,7 +11,7 @@ namespace XatServer
 		{
 			Console.WriteLine("Hola, sóc el servidor!");
 			
-			Server servidor = new Server("192.168.130.40", 9898);
+			Server servidor = new Server("192.168.130.44", 9898);
 			
 			if (!servidor.Start())
 			{
@@ -31,7 +31,7 @@ namespace XatServer
                     {
                         try
                         {
-                            Console.WriteLine("El client diu: " + servidor.ReadLine());
+                            Console.WriteLine("El client " + servidor.ReadLine() + " diu: " + servidor.ReadLine());
                         }
                         catch (Exception ex)
                         {
